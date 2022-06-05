@@ -1,6 +1,23 @@
 import re
 import numpy as np
 
+def logysis(filename: str):
+    """Read Logfile
+    
+    Parameters
+    ----------
+    filename: str
+        Path to logfile
+
+    Returns
+    -------
+    out: list
+        List of dictionary items of data
+    """
+    idx, data = read_logfile(filename)
+    header = read_header(data)
+    out = read_data(data, idx, header)
+    return out
 
 def read_logfile(filename: str):
     """Read log file
@@ -173,14 +190,3 @@ def read_data(data: list, idx: list, header: list) -> list:
 
     return data_out
 
-
-if __name__ == '__main__':
-    print('Main')
-
-    idx, data = read_logfile('test_logfile.txt')
-    h = read_header(data)
-    out = read_data(data, idx, h)
-
-    print(out[0]['keypoints'].shape)
-    print(out[0]['cube'].shape)
-    # print(out)
